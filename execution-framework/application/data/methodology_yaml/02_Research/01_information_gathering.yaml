@@ -1,0 +1,18 @@
+title: null
+sections:
+  - heading: Background Research
+    tasks:
+      - id: domain-and-subject-matter-research
+        name: Domain and Subject Matter Research
+      - id: competitive-and-landscape-analysis
+        name: Competitive and Landscape Analysis
+      - id: requirements-gathering
+        name: Requirements Gathering
+  - heading: Technical Assessment
+    tasks:
+      - id: tooling-and-technology-review
+        name: Tooling and Technology Review
+      - id: dependency-mapping
+        name: Dependency Mapping
+      - id: risk-identification
+        name: Risk Identification

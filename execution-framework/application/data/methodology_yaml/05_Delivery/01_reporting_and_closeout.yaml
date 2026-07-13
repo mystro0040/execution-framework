@@ -1,0 +1,18 @@
+title: null
+sections:
+  - heading: Reporting
+    tasks:
+      - id: draft-executive-summary
+        name: Draft Executive Summary
+      - id: compile-final-deliverable
+        name: Compile Final Deliverable
+      - id: prepare-recommendations
+        name: Prepare Recommendations
+  - heading: Closeout
+    tasks:
+      - id: client-or-stakeholder-debrief
+        name: Client or Stakeholder Debrief
+      - id: lessons-learned-documentation
+        name: Lessons Learned Documentation
+      - id: archive-and-handoff
+        name: Archive and Handoff

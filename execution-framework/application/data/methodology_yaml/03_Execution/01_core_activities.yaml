@@ -1,0 +1,18 @@
+title: null
+sections:
+  - heading: Primary Workstreams
+    tasks:
+      - id: initiate-core-work
+        name: Initiate Core Work
+      - id: track-progress-against-milestones
+        name: Track Progress Against Milestones
+      - id: manage-dependencies-and-blockers
+        name: Manage Dependencies and Blockers
+  - heading: Documentation
+    tasks:
+      - id: maintain-execution-logs
+        name: Maintain Execution Logs
+      - id: capture-key-decisions-and-outcomes
+        name: Capture Key Decisions and Outcomes
+      - id: evidence-and-artifact-collection
+        name: Evidence and Artifact Collection

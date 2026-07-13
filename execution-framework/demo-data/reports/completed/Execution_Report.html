@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DemoProject_Alpha — Execution Report & Deliverable</title>
+    <style>/* Enable Native Smooth Scrolling & Prevent Menu Overlap */
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+/* Base Styles & Typography */
+body { font-family: 'Segoe UI', Arial, sans-serif; color: #2c3e50; line-height: 1.6; margin: 0; padding: 60px 0 0 0; background: #f4f6f8; }
+h1, h2, h3 { color: #1a252f; border-bottom: 2px solid #e67e22; padding-bottom: 5px; margin-top: 30px; overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
+h1 { font-size: 2.5em; border-bottom: 3px solid #e67e22; }
+h2 { font-size: 1.8em; }
+p, li { font-size: 11pt; color: #444; }
+
+/* Document Structure & Print Formatting */
+.page { max-width: 850px; margin: 40px auto; background: #fff; padding: 60px 60px 100px 60px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; min-height: 800px; }
+.page-break { page-break-before: always; }
+.no-break { page-break-inside: avoid; }
+
+/* Page Footer */
+.page-footer { position: absolute; bottom: 30px; left: 60px; right: 60px; font-size: 9pt; color: #7f8c8d; border-top: 1px solid #bdc3c7; padding-top: 10px; text-align: left; line-height: 1.4; }
+.page-footer .right { float: right; }
+
+/* Cover Page */
+.cover-page { text-align: center; display: flex; flex-direction: column; justify-content: center; }
+.report-logo { max-width: 300px; margin: 0 auto 40px auto; display: block; }
+.cover-title { font-size: 3.5em; margin-bottom: 10px; color: #2c3e50; border: none; }
+.cover-subtitle { font-size: 1.8em; color: #7f8c8d; margin-bottom: 20px; }
+.cover-status { font-weight: bold; color: #e67e22; font-size: 1.2em; margin-bottom: 60px; }
+.cover-details { text-align: left; margin-top: auto; font-size: 1.1em; }
+
+/* Table of Contents */
+.toc { list-style-type: none; padding: 0; }
+.toc li { margin-bottom: 10px; font-size: 1.1em; border-bottom: 1px dotted #ccc; padding-bottom: 5px; }
+.toc a { text-decoration: none; color: #2980b9; font-weight: bold; }
+.toc a:hover { color: #e67e22; }
+
+/* Universal Tables */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 30px; font-size: 10.5pt; }
+th, td { border: 1px solid #bdc3c7; padding: 12px 15px; text-align: left; vertical-align: top; }
+th { background-color: #2c3e50; color: #ffffff; font-weight: bold; }
+tr:nth-child(even) { background-color: #ecf0f1; }
+.table-title { font-weight: bold; background-color: #e67e22; color: white; text-align: center; font-size: 1.1em; }
+
+/* Unified Contact Tables */
+.contact-wrapper { margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.contact-wrapper h3 { background-color: #e5e7e9; color: #2c3e50; margin: 0; padding: 8px 15px; font-size: 1.1em; border: 1px solid #7f8c8d; border-bottom: none; font-weight: bold; }
+.contact-wrapper table { margin-top: 0; border: 1px solid #7f8c8d; box-shadow: none; margin-bottom: 0; }
+.contact-wrapper th { background-color: #7f8c8d; color: #ffffff; text-align: center; border: 1px solid #7f8c8d; }
+.contact-wrapper td { border: 1px solid #bdc3c7; vertical-align: middle; }
+.contact-wrapper p { margin: 0; }
+.contact-wrapper h1 { font-size: 1.5em; border-bottom: 2px solid #bdc3c7; color: #2c3e50; margin-top: 10px; margin-bottom: 10px; padding-bottom: 5px; }
+
+/* Methodology Visual Flowchart */
+.methodology-flow { display: flex; justify-content: space-between; align-items: center; margin: 30px 0; background: #ecf0f1; padding: 20px; border-radius: 8px; border: 1px solid #bdc3c7; }
+.flow-step { text-align: center; flex: 1; font-size: 10pt; }
+.flow-step strong { display: block; font-size: 11pt; color: #2c3e50; margin-bottom: 5px; }
+.flow-arrow { font-size: 1.5em; color: #e67e22; margin: 0 10px; }
+
+/* Severity Colors */
+.sev-critical { color: white; background-color: #c0392b; font-weight: bold; text-align: center; }
+.sev-high { color: white; background-color: #e67e22; font-weight: bold; text-align: center; }
+.sev-mod { background-color: #f1c40f; color: #333; font-weight: bold; text-align: center; }
+.sev-low { color: white; background-color: #27ae60; font-weight: bold; text-align: center; }
+.sev-info { color: white; background-color: #3498db; font-weight: bold; text-align: center; }
+
+/* Human Intervention Flags */
+.action-required { background-color: #fff3cd; color: #856404; border-left: 5px solid #ffc107; padding: 15px; margin: 20px 0; font-weight: bold; font-size: 11pt; border-radius: 4px; }
+.action-required::before { content: "⚠️ ACTION REQUIRED: "; color: #d32f2f; }
+
+/* Remediation Cards */
+.remediation-section ul { list-style-type: none; padding: 0; margin-top: 20px; }
+.remediation-section ul li { background: #fff; border-left: 6px solid #27ae60; padding: 15px 20px; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); border-top: 1px solid #eaeaea; border-right: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea; font-size: 10.5pt; }
+.remediation-section ul li strong { color: #27ae60; display: block; font-size: 1.1em; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ========================================================= */
+/* EXECUTION LOG STYLES                                       */
+/* ========================================================= */
+.execution-log details { margin-bottom: 20px; background: #fff; border-left: 4px solid #3498db; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); overflow: hidden; padding-bottom: 5px; border-top: 1px solid #eaeaea; border-right: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea; }
+.execution-log summary { font-weight: bold; cursor: pointer; color: #2c3e50; background-color: #f8f9fa; padding: 12px 18px; font-size: 1.05em; outline: none; border-bottom: 1px solid #eaeaea; }
+.execution-log details[open] summary { border-bottom: 1px solid #eaeaea; margin-bottom: 10px; }
+.execution-log details > *:not(summary) { padding: 0 15px; }
+
+.execution-log h3 { color: #2980b9; border-bottom: 1px solid #eaeaea; margin-top: 25px; padding-bottom: 5px; font-size: 1.3em; }
+.execution-log blockquote { border-left: 5px solid #e74c3c; margin: 0; padding: 20px; background: #fdfdfd; color: #333; border-top: 1px solid #eee; }
+.execution-log ul { list-style-type: none; padding-left: 0; margin: 0; }
+.execution-log ul li { border-bottom: 1px solid #ecf0f1; padding: 10px 0; font-size: 10.5pt; }
+.execution-log ul li:last-child { border-bottom: none; }
+.execution-log ul li strong { color: #2c3e50; display: inline-block; min-width: 140px; font-weight: 700; }
+
+.execution-log img { max-width: 100%; max-height: 450px; object-fit: contain; border: 2px solid #bdc3c7; border-radius: 4px; padding: 2px; margin-top: 15px; display: block; cursor: zoom-in; transition: border-color 0.2s; }
+.execution-log img:hover { border-color: #3498db; }
+
+.execution-log table { table-layout: fixed; width: 100%; }
+.execution-log td { word-wrap: break-word; overflow-wrap: break-word; }
+.execution-log td > div { max-width: 100%; overflow-x: auto; }
+
+/* ========================================================= */
+/* MODAL / LIGHTBOX STYLES                                    */
+/* ========================================================= */
+.modal { display: none; position: fixed; z-index: 100000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
+.modal-content { margin: auto; display: block; max-width: 90%; max-height: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 3px solid #fff; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+.close-modal { position: absolute; top: 25px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s; z-index: 100001; }
+.close-modal:hover, .close-modal:focus { color: #e67e22; text-decoration: none; cursor: pointer; }
+
+/* ========================================================= */
+/* TOP STICKY NAVIGATION BAR                                  */
+/* ========================================================= */
+#topNav { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(44, 62, 80, 0.85); backdrop-filter: blur(12px); box-shadow: 0 2px 10px rgba(0,0,0,0.3); z-index: 9999; transition: transform 0.4s ease, opacity 0.4s ease; }
+#topNav.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+#topNav .nav-container { max-width: 1100px; margin: 0 auto; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+#topNav .nav-brand { font-weight: 700; font-size: 1.2em; color: #ffffff; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
+#topNav .nav-brand:hover { color: #e67e22; }
+#topNav .nav-links { display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; }
+#topNav .nav-links a { text-decoration: none; color: #ecf0f1; font-size: 10pt; font-weight: 600; padding: 6px 12px; border-radius: 4px; transition: background-color 0.2s, color 0.2s; white-space: nowrap; }
+#topNav .nav-links a:hover { background-color: #e67e22; color: #ffffff; }
+#hideMenuBtn { background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #ecf0f1; font-size: 10pt; font-weight: bold; cursor: pointer; margin-left: 10px; padding: 6px 12px; border-radius: 20px; transition: background-color 0.2s, color 0.2s, border-color 0.2s; white-space: nowrap; }
+#hideMenuBtn:hover { background-color: #e67e22; border-color: #e67e22; color: #ffffff; }
+.mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: #ffffff; outline: none; }
+
+/* ========================================================= */
+/* RESTORE MENU BUTTON                                        */
+/* ========================================================= */
+#showMenuBtn { display: none; position: fixed; top: 15px; right: 20px; z-index: 10000; background-color: rgba(44, 62, 80, 0.85); backdrop-filter: blur(8px); color: #ffffff; border: 1px solid #7f8c8d; padding: 8px 16px; border-radius: 20px; font-size: 10pt; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: background-color 0.2s, color 0.2s; }
+#showMenuBtn:hover { background-color: #2c3e50; color: #e67e22; }
+
+/* ========================================================= */
+/* MOBILE RESPONSIVE - NAVIGATION MENU                        */
+/* ========================================================= */
+@media screen and (max-width: 1150px) {
+    .mobile-menu-btn { display: block; }
+    #topNav .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: rgba(44, 62, 80, 0.98); flex-direction: column; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); padding: 10px 0; }
+    #topNav .nav-links.show { display: flex; }
+    #topNav .nav-links a { padding: 15px; border-radius: 0; white-space: normal; }
+    #hideMenuBtn { padding: 15px; margin: 0; border: none; border-top: 1px solid #7f8c8d; border-radius: 0; width: 100%; }
+}
+
+/* ========================================================= */
+/* MOBILE RESPONSIVE - LAYOUT & TABLES                        */
+/* ========================================================= */
+@media screen and (max-width: 700px) {
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.4em; }
+    .page { margin: 0; padding: 30px 15px; min-height: auto; box-shadow: none; border-radius: 0; }
+    .cover-page { align-items: flex-start; text-align: left; }
+    .cover-title, .cover-subtitle, .cover-status, .report-logo { text-align: left; margin-left: 0; }
+    .cover-title { font-size: 2.2em; }
+    .cover-subtitle { font-size: 1.4em; }
+    .page-footer { position: relative; bottom: 0; left: 0; right: 0; margin-top: 40px; text-align: center; padding-bottom: 20px; }
+    .page-footer .right { display: block; float: none; margin-top: 5px; color: #95a5a6; }
+    .methodology-flow { flex-direction: column; align-items: stretch; gap: 10px; background: transparent; padding: 0; border: none; }
+    .flow-step { background: #ecf0f1; border: 1px solid #bdc3c7; padding: 15px; border-radius: 8px; width: 100%; box-sizing: border-box; }
+    .flow-arrow { transform: rotate(90deg); margin: 5px auto; font-size: 2em; display: block; text-align: center; width: 100%; }
+    .page > table, .no-break > table { display: block; width: 100%; border: none; margin-bottom: 40px !important; }
+    .page > table thead, .no-break > table thead { display: none; }
+    .page > table tbody, .no-break > table tbody { display: block; width: 100%; }
+    .page > table tr, .no-break > table tr { display: block; width: 100%; margin-bottom: 20px; border: 1px solid #bdc3c7; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; }
+    .page > table td, .no-break > table td { display: block; width: 100% !important; box-sizing: border-box; text-align: left; padding: 12px 15px !important; position: relative; border: none !important; border-bottom: 1px solid #ecf0f1 !important; white-space: normal !important; overflow-wrap: anywhere; height: auto !important; }
+    .page > table td:last-child, .no-break > table td:last-child { border-bottom: none !important; }
+    .page > table td::before, .no-break > table td::before { content: attr(data-label); display: block; position: relative; left: 0; top: 0; width: 100%; font-weight: bold; color: #7f8c8d; text-transform: uppercase; font-size: 8.5pt; white-space: normal; margin-bottom: 4px; }
+
+    td[data-label="Severity"]::before { display: none !important; }
+    td[data-label="Severity"] { text-align: center !important; font-size: 1.1em !important; padding: 15px !important; }
+
+    .execution-log table { display: block; width: 100%; border: none; box-shadow: none; margin-bottom: 40px !important; }
+    .execution-log tbody { display: block; width: 100%; }
+    .execution-log tr { display: flex; flex-direction: column; width: 100%; margin-bottom: 15px; border: 1px solid #bdc3c7; border-radius: 4px; overflow: hidden; }
+    .execution-log td { width: 100% !important; display: block; box-sizing: border-box; border: none !important; white-space: normal !important; min-width: auto; padding: 12px !important; }
+    .execution-log td:first-child { border-bottom: 1px solid #bdc3c7 !important; background-color: #ecf0f1; font-weight: bold; }
+    .execution-log td::before { content: none !important; }
+}
+
+/* ========================================================= */
+/* LIGHT PRINT THEME                                          */
+/* ========================================================= */
+body.light-theme pre,
+body.light-theme code,
+body.light-theme .execution-log div > pre { background-color: #f6f8fa !important; color: #24292e !important; border: 1px solid #e1e4e8 !important; border-radius: 6px !important; }
+body.light-theme .text-evidence-block { background-color: #f6f8fa !important; border: 1px solid #d1d5da !important; }
+body.light-theme .text-evidence-header { background-color: #e1e4e8 !important; color: #24292e !important; border-bottom: 1px solid #d1d5da !important; }
+body.light-theme .text-evidence-block pre,
+body.light-theme .text-evidence-block code { background-color: transparent !important; color: #24292e !important; border: none !important; }
+
+/* ========================================================= */
+/* PDF & PRINT EXPORT STYLES                                  */
+/* ========================================================= */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    #topNav, #showMenuBtn, #hideMenuBtn, .mobile-menu-btn, .modal { display: none !important; }
+    .action-required { display: block !important; }
+
+    body, html {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: auto !important;
+    }
+
+    .page {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 0 40px 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        min-height: auto !important;
+        position: relative !important;
+    }
+
+    .cover-page {
+        display: block !important;
+        text-align: center !important;
+        padding-top: 100px !important;
+    }
+
+    .page-footer {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin-top: 20px !important;
+        display: block !important;
+    }
+
+    .page-break { page-break-before: always !important; }
+    h1, h2, h3, h4, h5, .text-evidence-header, .table-title { page-break-after: avoid !important; }
+    tr, img, .contact-wrapper { page-break-inside: avoid !important; }
+    td, th, table { height: auto !important; }
+
+    pre, code, details, summary, blockquote, .finding-block, .text-evidence-block, .execution-log div {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+        word-break: break-all !important;
+        overflow-x: hidden !important;
+        page-break-inside: auto !important;
+    }
+
+    img {
+        max-width: 100% !important;
+        max-height: 600px !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 10px auto !important;
+        box-shadow: none !important;
+    }
+
+    /* ── Light-print: dark terminal/code blocks → light ── */
+    pre, .execution-log pre {
+        background-color: #f5f5f5 !important;
+        color: #1a1a1a !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+    }
+
+    code, .execution-log code {
+        background-color: #f0f0f0 !important;
+        color: #c0392b !important;
+        border: 1px solid #ddd !important;
+    }
+
+    pre code, .execution-log pre code {
+        background-color: transparent !important;
+        color: #1a1a1a !important;
+        border: none !important;
+    }
+
+    .code-block {
+        background-color: #f5f5f5 !important;
+        color: #1a1a1a !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+    }
+
+    /* ── Light-print: dark text-evidence blocks → light ── */
+    .text-evidence-block {
+        background-color: #f5f5f5 !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+    }
+
+    .text-evidence-header {
+        background-color: #dde1e4 !important;
+        color: #1a1a1a !important;
+        border-bottom: 1px solid #bbb !important;
+    }
+
+    .text-evidence-block pre,
+    .text-evidence-block code {
+        background-color: transparent !important;
+        color: #1a1a1a !important;
+        border: none !important;
+    }
+
+    /* ── Light-print: orange evidence banner → neutral ── */
+    .execution-log p:has(+ pre) {
+        background-color: #dde1e4 !important;
+        color: #1a1a1a !important;
+        border-color: #bbb !important;
+    }
+
+    /* ── Light-print: image containers ── */
+    .execution-log img,
+    .page img {
+        border-color: #cccccc !important;
+    }
+
+    /* ── Suppress decorative shadows for clean ink output ── */
+    .page, .contact-wrapper, .remediation-section ul li,
+    details, .execution-log details {
+        box-shadow: none !important;
+    }
+}
+
+/* ========================================================= */
+/* COLLAPSIBLE EVIDENCE BLOCKS (DETAILS / SUMMARY)            */
+/* ========================================================= */
+details {
+    background: #f8f9fa;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid #eaeaea;
+    border-left: 4px solid #2980b9;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+    color: #2c3e50;
+    outline: none;
+    font-size: 1.1em;
+    padding: 5px 0;
+}
+
+details[open] summary {
+    border-bottom: 1px solid #bdc3c7;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+/* ========================================================= */
+/* TERMINAL OUTPUT & CODE BLOCKS                              */
+/* ========================================================= */
+pre, .execution-log pre {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 9.5pt;
+    margin: 15px 0;
+    border: 1px solid #333;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+    line-height: 1.4;
+    white-space: pre-wrap !important;
+    white-space: -moz-pre-wrap !important;
+    white-space: -pre-wrap !important;
+    white-space: -o-pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-x: hidden !important;
+}
+
+code, .execution-log code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    background-color: #f1f1f1;
+    color: #c0392b;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.95em;
+}
+
+pre code, .execution-log pre code {
+    background-color: transparent !important;
+    color: inherit !important;
+    padding: 0;
+}
+
+/* ========================================================= */
+/* FULL-WIDTH ORANGE EVIDENCE HEADERS                         */
+/* ========================================================= */
+.execution-log p:has(+ pre) {
+    display: block;
+    background-color: #e67e22;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 4px 4px 0 0;
+    font-size: 11pt;
+    font-weight: bold;
+    margin-bottom: 0;
+    border: 1px solid #d35400;
+    border-bottom: none;
+}
+
+.execution-log p:has(+ pre)::before {
+    content: "\1F4C4 ";
+}
+
+p + pre, .execution-log p + pre {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    margin-top: 0 !important;
+}
+</style>
+</head>
+<body>
+
+<nav id="topNav">
+    <div class="nav-container">
+        <div class="nav-brand" id="navBrand">&#128197; Execution Framework</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#executive">Executive Summary</a>
+            <a href="#narrative">Execution Narrative</a>
+            <a href="#recommendations">Recommendations</a>
+            <button id="hideMenuBtn">Hide &#9650;</button>
+        </div>
+    </div>
+</nav>
+
+<button id="showMenuBtn">&#128065; Show Menu</button>
+
+<div class="page cover-page">
+    <h1 class="cover-title">DemoProject_Alpha</h1>
+    <div class="cover-subtitle">Execution Report & Deliverable</div>
+    <div class="cover-status">CONFIDENTIAL</div>
+    <div class="cover-details">
+        <strong>Date:</strong> May 29, 2026<br>
+        <strong>Project Type:</strong> Product Launch Execution<br>
+        <strong>Version:</strong> 1.0
+    </div>
+    <div class="page-footer" style="text-align:center;border:none;">
+        Generated by Execution Framework
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="page">
+    <h2>Confidentiality Statement</h2>
+    <p>This document is confidential and intended solely for the authorized recipient. Unauthorized distribution or reproduction is prohibited.</p>
+
+    <h2>Contact Information</h2>
+    <h3>Client</h3>
+    <h1>Client</h1>
+<p><strong>Name:</strong> Alex Johnson<br />
+<strong>Title:</strong> Director of Product<br />
+<strong>Email:</strong> alex@demo.org<br />
+<strong>Phone:</strong> (555) 000-1111</p>
+
+    <h3>Project Lead</h3>
+    <h1>Project Lead</h1>
+<p><strong>Name:</strong> Jordan Smith<br />
+<strong>Title:</strong> Project Lead<br />
+<strong>Email:</strong> jordan@team.org<br />
+<strong>Phone:</strong> (555) 000-2222</p>
+
+</div>
+
+<div class="page-break"></div>
+
+<div class="page">
+    <h2>Project Scope</h2>
+    <table>
+        <thead><tr><th>Project Type</th><th>Scope Name</th></tr></thead>
+        <tbody>
+        
+        <tr><td>Product Launch Execution</td><td>DemoProject_Alpha</td></tr>
+        
+        </tbody>
+    </table>
+    <p><strong>Exclusions:</strong> None</p>
+    <p><strong>Allowances:</strong> Full access granted</p>
+</div>
+
+<div class="page-break"></div>
+
+<div class="page">
+    <h1 id="executive">Executive Summary</h1>
+
+    
+    <div class="action-required">Missing content for EXECUTIVE_SUMMARY. Please update the DRAFTS.md file and run this script again.</div>
+    
+
+    
+    <h2>Key Findings</h2>
+    <div class="action-required">Missing content for KEY_FINDINGS. Please update the DRAFTS.md file and run this script again.</div>
+    
+    <h2>Methodology Notes</h2>
+    <div class="action-required">Missing content for METHODOLOGY_NOTES. Please update the DRAFTS.md file and run this script again.</div>
+    
+    <h2>Results & Analysis</h2>
+    <div class="action-required">Missing content for RESULTS_ANALYSIS. Please update the DRAFTS.md file and run this script again.</div>
+    
+    <h2>Recommendations & Next Steps</h2>
+    <div class="action-required">Missing content for RECOMMENDATIONS. Please update the DRAFTS.md file and run this script again.</div>
+    
+</div>
+
+<div class="page-break"></div>
+
+<div class="page">
+    <h1 id="narrative">Execution Narrative</h1>
+    <div class="execution-log">
+        <h3>Scope Definition</h3>
+<p><strong><a href="#cl-define-project-scope">Define Project Scope</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>Scope defined as DemoProject_Alpha — covering all five delivery phases.<br />
+In-scope: planning, research, core execution, review, and final delivery.<br />
+Out-of-scope: post-launch support and maintenance activities.</p>
+</blockquote>
+<p><br></p>
+<p><strong><a href="#cl-identify-stakeholders">Identify Stakeholders</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>Primary stakeholders identified: Alex Johnson (Client), Jordan Smith (Project Lead).<br />
+Secondary stakeholders: 3 team contributors confirmed availability.</p>
+</blockquote>
+<p><br></p>
+<p><strong><a href="#cl-set-success-criteria">Set Success Criteria</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>Success criteria agreed upon:<br />
+1. All five phases completed within timeline.<br />
+2. Final deliverable accepted by client without revision requests.<br />
+3. No critical blockers unresolved at delivery.</p>
+</blockquote>
+<p><br></p>
+<h3>Resource Planning</h3>
+<p><strong><a href="#cl-allocate-team-resources">Allocate Team Resources</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>Team of 3 allocated. Roles assigned: Lead, Research, Documentation.</p>
+</blockquote>
+<p><br></p>
+<p><strong><a href="#cl-define-timeline-and-milestones">Define Timeline and Milestones</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>4-week timeline defined. Gate reviews at end of Phase 2 and Phase 4.</p>
+</blockquote>
+<p><br></p>
+<h3>Primary Workstreams</h3>
+<p><strong><a href="#cl-initiate-core-work">Initiate Core Work</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>Core work initiated on schedule. Team kickoff held, workstreams assigned.</p>
+</blockquote>
+<p><br></p>
+<p><strong><a href="#cl-track-progress-against-milestones">Track Progress Against Milestones</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>Week 1: Planning complete. Week 2: Research complete (gate review passed).<br />
+Week 3: Core execution 80% complete. On track for final delivery.</p>
+</blockquote>
+<p><br></p>
+<p><strong><a href="#cl-manage-dependencies-and-blockers">Manage Dependencies and Blockers</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>One blocker identified: third-party tooling unavailable. Resolved by sourcing alternative vendor within 48 hours.</p>
+</blockquote>
+<p><br></p>
+<h3>Documentation</h3>
+<p><strong><a href="#cl-maintain-execution-logs">Maintain Execution Logs</a></strong></p>
+<h3><i>Execution Notes</i></h3>
+
+<blockquote>
+<p>Logs maintained daily throughout execution phase. All checklists current.</p>
+</blockquote>
+<p><br></p>
+    </div>
+</div>
+
+<script>// ==========================================
+// IMAGE MODAL / LIGHTBOX LOGIC
+// ==========================================
+var modal = document.getElementById("imageModal");
+var modalImg = document.getElementById("modalImg");
+var imgs = document.querySelectorAll(".execution-log img");
+var span = document.querySelector(".close-modal");
+
+if (modal && modalImg) {
+    imgs.forEach(function(img) {
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+    });
+
+    if (span) {
+        span.onclick = function() { modal.style.display = "none"; }
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == modal) { modal.style.display = "none"; }
+    }
+}
+
+// ==========================================
+// TOP NAVIGATION & MOBILE MENU LOGIC
+// ==========================================
+var mobileBtn = document.getElementById("mobileMenuBtn");
+var navLinks = document.getElementById("navLinks");
+
+if (mobileBtn && navLinks) {
+    // Toggle mobile menu
+    mobileBtn.onclick = function(e) {
+        navLinks.classList.toggle("show");
+        e.stopPropagation();
+    };
+
+    // Close menu when clicking outside
+    window.addEventListener("click", function(e) {
+        if (navLinks.classList.contains("show") && e.target !== mobileBtn && !navLinks.contains(e.target)) {
+            navLinks.classList.remove("show");
+        }
+    });
+
+    // Close menu when clicking a mobile link
+    var links = navLinks.getElementsByTagName("a");
+    for (var i = 0; i < links.length; i++) {
+        links[i].onclick = function() {
+            navLinks.classList.remove("show");
+        };
+    }
+}
+
+// ==========================================
+// HIDE / SHOW MENU LOGIC
+// ==========================================
+var topNav = document.getElementById("topNav");
+var hideMenuBtn = document.getElementById("hideMenuBtn");
+var showMenuBtn = document.getElementById("showMenuBtn");
+
+if (hideMenuBtn && topNav && showMenuBtn) {
+    // When "Hide" is clicked, slide menu up and show the restore button
+    hideMenuBtn.onclick = function(e) {
+        e.preventDefault(); // Stop any default link behavior
+        e.stopPropagation();
+        topNav.classList.add("hidden");
+        showMenuBtn.style.display = "block";
+    };
+
+    // When "Show Menu" is clicked, slide menu back down and hide button
+    showMenuBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        topNav.classList.remove("hidden");
+        showMenuBtn.style.display = "none";
+    };
+}
+
+// ==========================================
+// BULLETPROOF SMOOTH SCROLLING
+// ==========================================
+var navBrand = document.getElementById("navBrand");
+
+// Scroll to top when clicking the brand logo
+if (navBrand) {
+    navBrand.onclick = function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+}
+
+// Intercept all internal anchor links for smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function (e) {
+        var targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        var targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            e.preventDefault(); // Stop the browser from instantly jumping
+            
+            // Calculate the position, accounting for the 90px sticky header
+            var headerOffset = 90; 
+            var elementPosition = targetElement.getBoundingClientRect().top;
+            var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            // Glide smoothly to the calculated position
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    });
+});</script>
+</body>
+</html>

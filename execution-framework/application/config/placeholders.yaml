@@ -1,0 +1,16 @@
+# Canonical placeholder vocabulary for the Execution Framework.
+#
+# This framework's methodology currently contains NO <PLACEHOLDER> tokens, so
+# the vocabulary is intentionally empty. It still exists so that:
+#   - loadout_manager has a valid vocab file to read (it runs fine with no
+#     fields — it simply has nothing to prompt for or populate),
+#   - the markdown->YAML importer has a (no-op) alias map to normalize against,
+#   - future engagement variables can be added here without any code changes.
+#
+# `fields`  = engagement data you collect (loadout variables). Each entry maps a
+#             canonical <TOKEN> to { key, label, example, aliases: [...] }.
+# `ignore`  = illustrative/example tokens that are NOT engagement data; loadout
+#             leaves these untouched and never prompts for them.
+
+fields: {}
+ignore: []

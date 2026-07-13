@@ -1,0 +1,16 @@
+title: null
+sections:
+  - heading: Validation
+    tasks:
+      - id: review-outputs-against-success-criteria
+        name: Review Outputs Against Success Criteria
+      - id: stakeholder-feedback-collection
+        name: Stakeholder Feedback Collection
+      - id: gap-and-issue-analysis
+        name: Gap and Issue Analysis
+  - heading: Refinement
+    tasks:
+      - id: address-feedback-and-findings
+        name: Address Feedback and Findings
+      - id: final-quality-check
+        name: Final Quality Check

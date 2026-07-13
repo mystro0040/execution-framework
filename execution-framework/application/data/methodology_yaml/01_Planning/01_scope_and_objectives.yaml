@@ -1,0 +1,20 @@
+title: null
+sections:
+  - heading: Scope Definition
+    tasks:
+      - id: define-project-scope
+        name: Define Project Scope
+      - id: identify-stakeholders
+        name: Identify Stakeholders
+      - id: set-success-criteria
+        name: Set Success Criteria
+      - id: document-constraints-and-assumptions
+        name: Document Constraints and Assumptions
+  - heading: Resource Planning
+    tasks:
+      - id: allocate-team-resources
+        name: Allocate Team Resources
+      - id: define-timeline-and-milestones
+        name: Define Timeline and Milestones
+      - id: budget-and-cost-review
+        name: Budget and Cost Review
