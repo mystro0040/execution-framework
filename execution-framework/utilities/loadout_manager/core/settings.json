@@ -1,11 +1,11 @@
 {
   "data_source": "engagement_dir",
-  "loadout_file": "/home/primaryu/Workspace/Production_Ready/Offensive_Security/execution-framework/execution-framework/engagement/loadout/loadout.md",
-  "session_file": "/home/primaryu/Workspace/Production_Ready/Offensive_Security/execution-framework/execution-framework/engagement/session.yaml",
-  "engagement_dir": "/home/primaryu/Workspace/Production_Ready/Offensive_Security/execution-framework/execution-framework/engagement/data",
+  "loadout_file": "/home/primaryu/Workspace/Production_Ready/public/Offensive_Security/execution-framework/execution-framework/engagement/loadout/loadout.md",
+  "session_file": "/home/primaryu/Workspace/Production_Ready/public/Offensive_Security/execution-framework/execution-framework/engagement/session.yaml",
+  "engagement_dir": "/home/primaryu/Workspace/Production_Ready/public/Offensive_Security/execution-framework/execution-framework/engagement/data",
   "single_command_mode": "paste",
-  "buffer_file": "/home/primaryu/Workspace/Production_Ready/Offensive_Security/execution-framework/execution-framework/engagement/loadout/command_buffer.md",
-  "playbook_dir": "/home/primaryu/Workspace/Production_Ready/Offensive_Security/execution-framework/execution-framework/engagement/loadout_playbook",
+  "buffer_file": "/home/primaryu/Workspace/Production_Ready/public/Offensive_Security/execution-framework/execution-framework/engagement/loadout/command_buffer.md",
+  "playbook_dir": "/home/primaryu/Workspace/Production_Ready/public/Offensive_Security/execution-framework/execution-framework/engagement/loadout_playbook",
   "include_requirementless_tasks": true,
   "per_command_applicability": true
 }
