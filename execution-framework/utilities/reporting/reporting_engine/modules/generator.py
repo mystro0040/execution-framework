@@ -22,6 +22,33 @@ TEMPLATE_FILE = 'report_template.html'
 OUTPUT_PATH  = PROJECT_ROOT / 'reports' / 'completed' / f'{REPORT_FILENAME}.html'
 
 
+# ==========================================
+# UNTRUSTED-INPUT ESCAPING (stored-XSS hardening)
+# The HTML template renders data fields raw (Jinja autoescape is intentionally
+# OFF so the framework's own CSS/JS pass through untouched). To stop a <script>
+# in a target-derived field from executing in the client-facing report,
+# untrusted values are HTML-escaped where they enter the context. Framework-
+# owned values (css_content/js_content, framework-built *_html) are left as-is.
+# ==========================================
+def _escape_untrusted(value):
+    """Recursively HTML-escape string values in untrusted JSON-derived data."""
+    if isinstance(value, str):
+        return html.escape(value)
+    if isinstance(value, list):
+        return [_escape_untrusted(v) for v in value]
+    if isinstance(value, dict):
+        return {k: _escape_untrusted(v) for k, v in value.items()}
+    return value
+
+def _neutralize_narrative(html_str):
+    """Defence-in-depth for the execution-log narrative: neutralise any literal
+    <script> tag (never part of legitimate report output) so pasted target
+    output cannot execute. Benign narratives render unchanged."""
+    html_str = re.sub(r'(?i)<\s*script\b', '&lt;script', html_str)
+    html_str = re.sub(r'(?i)<\s*/\s*script\s*>', '&lt;/script&gt;', html_str)
+    return html_str
+
+
 def load_and_convert_execution_log():
     if not EXECUTION_DIR.exists():
         return "<p>No execution narrative provided.</p>"
@@ -68,7 +95,8 @@ def load_and_convert_execution_log():
     md_content = re.sub(r'<summary[^>]*>(.*?)</summary>', r'<h3>\1</h3>', md_content)
     md_content = md_content.replace('\xa0', ' ')
 
-    return markdown.markdown(md_content, extensions=['tables', 'fenced_code', 'nl2br', 'md_in_html'])
+    html_content = markdown.markdown(md_content, extensions=['tables', 'fenced_code', 'nl2br', 'md_in_html'])
+    return _neutralize_narrative(html_content)
 
 
 def generate_human_drafts(context, output_path):
@@ -101,15 +129,15 @@ def run_generator():
     networks = load_json_data('networks')
 
     context = {
-        'networks':           networks,
-        'assets':             load_json_data('assets'),
-        'users':              load_json_data('users'),
+        'networks':           _escape_untrusted(networks),
+        'assets':             _escape_untrusted(load_json_data('assets')),
+        'users':              _escape_untrusted(load_json_data('users')),
         'technical_narrative': load_and_convert_execution_log(),
         'client_info':        load_meta_markdown('client'),
         'lead_info':          load_meta_markdown('lead'),
-        'engagement_type':    eng_type,
-        'scope_exclusions':   exclusions,
-        'client_allowances':  allowances,
+        'engagement_type':    html.escape(eng_type),
+        'scope_exclusions':   html.escape(exclusions),
+        'client_allowances':  html.escape(allowances),
         'report_title':       REPORT_TITLE,
         'framework_name':     FRAMEWORK_NAME,
         'client_role':        CLIENT_ROLE,

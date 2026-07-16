@@ -2,9 +2,35 @@
 import json
 import os
 from core.config import (
+    BASE_DIR,
     SETTINGS_FILE, PLAYBOOK_DIR, BUFFER_FILE, LOADOUT_FILE,
     SESSION_FILE, ENGAGEMENT_DIR,
 )
+
+# Keys whose values are filesystem paths that MUST stay inside this framework
+# instance. A settings.json copied from another tree (or one that shipped with
+# absolute paths) must never redirect writes back into the original/live tree.
+_PATH_KEYS = ('loadout_file', 'session_file', 'engagement_dir',
+              'buffer_file', 'playbook_dir')
+
+
+def _resolve_path(value, default):
+    """Resolve a settings path against THIS framework root (BASE_DIR).
+
+    - Relative fragments are anchored to BASE_DIR.
+    - Absolute paths are honoured only if they point INSIDE this framework
+      instance; anything outside (e.g. a stale absolute path copied from
+      another checkout) is discarded in favour of the computed default.
+    """
+    if not value:
+        return default
+    if not os.path.isabs(value):
+        value = os.path.join(BASE_DIR, value)
+    value = os.path.abspath(value)
+    root = os.path.abspath(BASE_DIR)
+    if value == root or value.startswith(root + os.sep):
+        return value
+    return default
 
 DEFAULTS = {
     # where the tool reads collected engagement data from:
@@ -41,6 +67,10 @@ def load_settings():
                 data.update(json.load(f))
         except (ValueError, OSError):
             pass
+    # Keep every path setting scoped to THIS framework instance (see
+    # _resolve_path) so the tool never writes into another/live tree.
+    for key in _PATH_KEYS:
+        data[key] = _resolve_path(data.get(key), DEFAULTS[key])
     return data
 
 

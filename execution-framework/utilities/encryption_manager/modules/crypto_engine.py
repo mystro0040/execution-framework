@@ -1,6 +1,7 @@
 import os
 import shutil
 import tempfile
+import zipfile
 from core.config import ENABLE_SAFE_MODE
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -8,6 +9,15 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.padding import PKCS7
 from secrets import token_bytes
+
+def _safe_extract(zipf, dest):
+    """Zip-slip guard: refuse any member that would resolve outside dest."""
+    dest = os.path.realpath(dest)
+    for m in zipf.namelist():
+        target = os.path.realpath(os.path.join(dest, m))
+        if target != dest and not target.startswith(dest + os.sep):
+            raise ValueError(f"Unsafe path in archive: {m}")
+    zipf.extractall(dest)
 
 def derive_key(password, salt):
     kdf = PBKDF2HMAC(
@@ -24,7 +34,8 @@ def encrypt_directory(target_dir, encrypted_file, salt_file, password):
         return False, "Directory not found."
 
     # Zip target to system temp folder (away from the target dir)
-    temp_zip = tempfile.mktemp(suffix='.zip')
+    _fd, temp_zip = tempfile.mkstemp(suffix='.zip')
+    os.close(_fd)
     shutil.make_archive(temp_zip.replace('.zip', ''), 'zip', target_dir)
 
     salt = token_bytes(16)
@@ -110,12 +121,14 @@ def decrypt_directory(encrypted_file, target_dir, salt_file, password):
     except ValueError:
         return False, "Incorrect password or corrupted data."
 
-    temp_zip = tempfile.mktemp(suffix='.zip')
+    _fd, temp_zip = tempfile.mkstemp(suffix='.zip')
+    os.close(_fd)
     with open(temp_zip, "wb") as f:
         f.write(plaintext_bytes)
 
-    # Extract the zip back into the target directory
-    shutil.unpack_archive(temp_zip, target_dir, 'zip')
+    # Extract the zip back into the target directory (zip-slip guarded)
+    with zipfile.ZipFile(temp_zip, 'r') as zf:
+        _safe_extract(zf, target_dir)
 
     # Clean up the zip and the vault files
     os.remove(temp_zip)
